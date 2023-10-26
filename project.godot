@@ -11,11 +11,18 @@ config_version=5
 [application]
 
 config/name="dodgecoin"
-config/features=PackedStringArray("4.1")
+run/main_scene="res://scenes/start_menu.tscn"
+config/features=PackedStringArray("4.1", "C#")
+
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/size/resizable=false
 
 [dotnet]
 
-project/assembly_name="UnnamedProject"
+project/assembly_name="dodgecoin"
 
 [editor]
 
@@ -28,4 +35,5 @@ enabled=PackedStringArray()
 
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="mobile"
