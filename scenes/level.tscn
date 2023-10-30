@@ -1,3 +1,79 @@
-[gd_scene format=3 uid="uid://dg6wrjg42w6u6"]
+[gd_scene load_steps=8 format=3 uid="uid://dg6wrjg42w6u6"]
 
-[node name="level" type="Node2D"]
+[ext_resource type="Script" path="res://scripts/Player.cs" id="1_214f4"]
+[ext_resource type="Texture2D" uid="uid://cm4rjll72fawu" path="res://assets/ball.png" id="1_hg7ab"]
+[ext_resource type="Script" path="res://scripts/Coin.cs" id="3_47dy8"]
+[ext_resource type="Texture2D" uid="uid://c5ruksu3cfqml" path="res://assets/coin.png" id="3_lu1e8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0mmly"]
+size = Vector2(10.5, 1290.25)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cd5ci"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yfvln"]
+radius = 14.0
+
+[node name="Level" type="Node2D"]
+
+[node name="Level_BG" type="ColorRect" parent="."]
+offset_right = 1280.0
+offset_bottom = 726.0
+size_flags_horizontal = 4
+color = Color(0, 0, 0, 1)
+metadata/_edit_lock_ = true
+
+[node name="Wall_L" type="StaticBody2D" parent="Level_BG"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level_BG/Wall_L"]
+position = Vector2(-5, 362.25)
+shape = SubResource("RectangleShape2D_0mmly")
+
+[node name="Wall_R" type="StaticBody2D" parent="Level_BG"]
+position = Vector2(50, 2.08165e-12)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level_BG/Wall_R"]
+position = Vector2(1230, 362)
+shape = SubResource("RectangleShape2D_0mmly")
+
+[node name="Wall_U" type="StaticBody2D" parent="Level_BG"]
+position = Vector2(19.39, 2.08165e-12)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level_BG/Wall_U"]
+position = Vector2(612.61, -2.75)
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_0mmly")
+
+[node name="Wall_D" type="StaticBody2D" parent="Level_BG"]
+position = Vector2(19.39, 500)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level_BG/Wall_D"]
+position = Vector2(620.61, 228)
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_0mmly")
+
+[node name="Player" type="CharacterBody2D" parent="."]
+position = Vector2(665, 389)
+script = ExtResource("1_214f4")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+position = Vector2(2.08165e-12, 2.08165e-12)
+shape = SubResource("CircleShape2D_cd5ci")
+debug_color = Color(0, 0.6, 0.701961, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="Player/CollisionShape2D"]
+scale = Vector2(2.35, 2.35)
+texture = ExtResource("1_hg7ab")
+
+[node name="Coin" type="StaticBody2D" parent="."]
+position = Vector2(456, 296)
+script = ExtResource("3_47dy8")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Coin"]
+position = Vector2(2.08165e-12, 2.08165e-12)
+shape = SubResource("CircleShape2D_yfvln")
+
+[node name="Sprite2D" type="Sprite2D" parent="Coin/CollisionShape2D"]
+scale = Vector2(1.64, 1.64)
+texture = ExtResource("3_lu1e8")
