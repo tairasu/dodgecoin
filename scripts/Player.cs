@@ -2,8 +2,11 @@ using Godot;
 
 public partial class Player : CharacterBody2D
 {
+	[Export]
+	private float maxSpeed = 600.0f;
+	
 	private float currentSpeed = 0.0f;
-	private const float maxSpeed = 600.0f;
+	
 	private const float accelerationTime = 0.2f; // time until max speed is reached
 	private float accelerationTimer = 0.0f;
 
