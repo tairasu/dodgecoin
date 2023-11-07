@@ -1,3 +1,6 @@
 .DS_Store
 .godot
 builds
+.vscode/launch.json
+.vscode/settings.json
+.vscode/tasks.json
