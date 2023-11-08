@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://d1skrecitl85g"]
 
-[ext_resource type="Script" path="res://scripts/start_button.cs" id="1_5vipe"]
-[ext_resource type="Script" path="res://scripts/quit_button.cs" id="2_s4u5v"]
+[ext_resource type="Script" path="res://scripts/StartButton.cs" id="1_rv0h1"]
+[ext_resource type="Script" path="res://scripts/QuitButton.cs" id="2_dqm5c"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_6wbji"]
 font_size = 69
@@ -57,7 +57,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 40
 text = "START"
-script = ExtResource("1_5vipe")
+script = ExtResource("1_rv0h1")
 metadata/_edit_use_anchors_ = true
 
 [node name="quit_button" type="Button" parent="menu_background"]
@@ -76,5 +76,5 @@ grow_vertical = 2
 theme_override_font_sizes/font_size = 40
 text = "QUIT
 "
-script = ExtResource("2_s4u5v")
+script = ExtResource("2_dqm5c")
 metadata/_edit_use_anchors_ = true
