@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://byynffsr17rnk"]
+
+[ext_resource type="Script" path="res://scripts/Room.cs" id="1_l2m7r"]
+[ext_resource type="PackedScene" uid="uid://1u5mpnbc2wj6" path="res://scenes/rooms/walls/wall_open.tscn" id="1_l542q"]
+[ext_resource type="PackedScene" uid="uid://2qgqq2rlphma" path="res://scenes/rooms/walls/wall_closed.tscn" id="2_d3wpv"]
+
+[node name="Room" type="Node2D"]
+script = ExtResource("1_l2m7r")
+metadata/_edit_group_ = true
+metadata/_edit_vertical_guides_ = []
+
+[node name="wall_open" parent="." instance=ExtResource("1_l542q")]
+position = Vector2(-275, 0)
+
+[node name="wall_open2" parent="." instance=ExtResource("1_l542q")]
+position = Vector2(275, 0)
+rotation = 3.14159
+
+[node name="wall_closed" parent="." instance=ExtResource("2_d3wpv")]
+position = Vector2(0, -275)
+rotation = 1.5708
+
+[node name="wall_closed2" parent="." instance=ExtResource("2_d3wpv")]
+position = Vector2(0, 275)
+rotation = 4.71239

@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="dodgecoin"
-run/main_scene="res://scenes/start_menu.tscn"
+run/main_scene="res://scenes/UI/start_menu.tscn"
 config/features=PackedStringArray("4.1", "C#")
 
 [display]
@@ -32,6 +32,11 @@ version_control/autoload_on_startup=true
 [editor_plugins]
 
 enabled=PackedStringArray()
+
+[layer_names]
+
+2d_physics/layer_1="Player"
+2d_physics/layer_2="Walls"
 
 [rendering]
 

@@ -1,12 +1,14 @@
 [gd_scene load_steps=4 format=3 uid="uid://ciqh4cf7nxcrm"]
 
 [ext_resource type="Script" path="res://scripts/Player.cs" id="1_qgskg"]
-[ext_resource type="Texture2D" uid="uid://bjgfg11s8jq03" path="res://assets/ball.png" id="1_sqnxn"]
+[ext_resource type="Texture2D" uid="uid://d0s4ridukqhw1" path="res://assets/ball.png" id="1_sqnxn"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_grgyn"]
 
 [node name="Player" type="CharacterBody2D"]
+collision_mask = 2
 script = ExtResource("1_qgskg")
+metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(2.35, 2.35)
@@ -15,3 +17,7 @@ texture = ExtResource("1_sqnxn")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_grgyn")
 debug_color = Color(0, 0.6, 0.701961, 1)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position_smoothing_enabled = true
+position_smoothing_speed = 8.0

@@ -1,13 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://divv51gha82rd"]
+[gd_scene load_steps=3 format=3 uid="uid://divv51gha82rd"]
 
-[ext_resource type="Script" path="res://scripts/Coin.cs" id="1_hxk7v"]
-[ext_resource type="Texture2D" uid="uid://b2tyrnqks7xds" path="res://assets/coin.png" id="2_8mcgc"]
+[ext_resource type="Texture2D" uid="uid://b2ackrn5wagme" path="res://assets/coin.png" id="2_8mcgc"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mqqrk"]
-radius = 14.0
+radius = 13.0
 
 [node name="Coin" type="RigidBody2D"]
-script = ExtResource("1_hxk7v")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(2.08165e-12, 2.08165e-12)

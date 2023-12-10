@@ -14,7 +14,7 @@ public partial class StartButton : Button
 		if(ButtonPressed) {
 			//print to console
 			GD.Print("Start button pressed");
-			GetTree().ChangeSceneToFile("res://scenes/level.tscn");
+			GetTree().ChangeSceneToFile("res://scenes/levels/level1.tscn");
 		}
 	}
 }
