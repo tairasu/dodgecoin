@@ -1,0 +1,16 @@
+[gd_scene load_steps=8 format=3 uid="uid://dqf05pqf8m4ii"]
+
+[ext_resource type="Script" path="res://scripts/Level1.cs" id="1_woda2"]
+[ext_resource type="PackedScene" uid="uid://ciqh4cf7nxcrm" path="res://scenes/player.tscn" id="2_38d63"]
+[ext_resource type="PackedScene" uid="uid://4kd5q5aqtwwf" path="res://scenes/rooms/room_four_walls_open.tscn" id="2_ll44r"]
+[ext_resource type="PackedScene" uid="uid://uckk0cpvqone" path="res://scenes/rooms/room_one_wall_open.tscn" id="3_71yk3"]
+[ext_resource type="PackedScene" uid="uid://bjf1anmg4venk" path="res://scenes/rooms/room_three_walls_open.tscn" id="4_7m06b"]
+[ext_resource type="PackedScene" uid="uid://3o0567nn5ep2" path="res://scenes/rooms/room_two_walls_open_adjacent.tscn" id="5_jeo2s"]
+[ext_resource type="PackedScene" uid="uid://byynffsr17rnk" path="res://scenes/rooms/room_two_walls_open_opposite.tscn" id="6_p1pud"]
+
+[node name="level1" type="Node"]
+script = ExtResource("1_woda2")
+rooms = Array[PackedScene]([ExtResource("2_ll44r"), ExtResource("3_71yk3"), ExtResource("4_7m06b"), ExtResource("5_jeo2s"), ExtResource("6_p1pud")])
+
+[node name="Player" parent="." instance=ExtResource("2_38d63")]
+unique_name_in_owner = true
