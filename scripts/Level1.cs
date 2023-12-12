@@ -5,21 +5,18 @@ public partial class Level1 : Node
 	[Export]
 	PackedScene[] rooms;
 	
-	Node2D startingRoom;
-	CharacterBody2D player;
-
 	Vector2 currentRoomPos;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		var roomScene = rooms[GD.Randi() % rooms.Length];
-		startingRoom = (Node2D)roomScene.Instantiate();
+		Node2D startingRoom = (Node2D)roomScene.Instantiate();
 		Room roomArea = startingRoom.GetNode<Room>("Area2D");
 		roomArea.PlayerEntered += OnPlayerEntered;
 		AddChild(startingRoom);
 
-		player = GetNode<CharacterBody2D>("%Player");
+		CharacterBody2D player = GetNode<CharacterBody2D>("%Player");
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -34,7 +31,7 @@ public partial class Level1 : Node
 
 		for (int i = -1; i <= 1; i++) {
 			for (int j = -1; j <= 1; j++) {
-				if (i == 0 && j == 0) continue;
+				// if (i == 0 && j == 0) continue;
 
 				Node2D room = (Node2D)roomScene.Instantiate();
 				room.Position = pos + 550 * i * Vector2.Right + 550 * j * Vector2.Down;
