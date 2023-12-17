@@ -6,7 +6,7 @@
 
 [node name="level1" type="Node"]
 script = ExtResource("1_woda2")
-rooms = Array[PackedScene]([ExtResource("2_ll44r")])
+roomScene = ExtResource("2_ll44r")
 
 [node name="Player" parent="." instance=ExtResource("2_38d63")]
 unique_name_in_owner = true
