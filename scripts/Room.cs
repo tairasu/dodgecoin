@@ -1,25 +1,31 @@
+using System.Linq;
 using Godot;
+using Godot.Collections;
 
-public partial class Room : Area2D
+public partial class Room : Node2D
 {
-	[Signal]
-	public delegate void PlayerEnteredEventHandler(Vector2 pos);
+	public Vector2 id { get; set; }
+	public float width = 600;
+	public float height = 600;
+	private Dictionary openDoors = new Dictionary
+	{
+		{"left", true},
+		{"right", true},
+		{"up", true},
+		{"down", true}
+	};
+	private int openDoorCount;
 
-	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		BodyEntered += OnBodyEntered;
+		updateOpenDoorCount();
 	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
+    public void updateOpenDoorCount()
 	{
+		openDoorCount = openDoors.Values.Sum(x => (bool)x ? 1 : 0);
 	}
 
-	private void OnBodyEntered(Node2D body)
-	{
-		EmitSignal(nameof(PlayerEntered), GlobalPosition);
-	}
 
 
 }

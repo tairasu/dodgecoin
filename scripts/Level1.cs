@@ -3,54 +3,59 @@ using Godot;
 public partial class Level1 : Node
 {
 	[Export]
-	PackedScene[] rooms;
-	
-	Vector2 currentRoomPos;
+	PackedScene roomScene;
+
+	Vector2[,] roomIDs = new Vector2[5, 5];
+	Vector2 currentRoomID;
+
+
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		// var roomScene = rooms[GD.Randi() % rooms.Length];
-		// Node2D startingRoom = (Node2D)roomScene.Instantiate();
-		// Room roomArea = startingRoom.GetNode<Room>("Area2D");
-		// roomArea.PlayerEntered += OnPlayerEntered;
-		// AddChild(startingRoom);
 		GenerateSurroundingRooms(Vector2.Zero);
-
-		//CharacterBody2D player = GetNode<CharacterBody2D>("%Player");
 	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
-	{
-
-	}
-
+	
+	/// <summary>
+	/// Generates surrounding rooms based on the given position.
+	/// </summary>
+	/// <param name="pos">The position to generate the rooms around.</param>
 	private void GenerateSurroundingRooms(Vector2 pos)
 	{
-		var roomScene = rooms[GD.Randi() % rooms.Length];
+		for (int i = -2; i <= 2; i++)
+		{
+			for (int j = -2; j <= 2; j++)
+			{
+				Room room = (Room)roomScene.Instantiate();
+				room.Position = pos + room.width * i * Vector2.Right + room.height * j * Vector2.Down;
+				room.Set(
+					"id",
+					new Vector2(
+						room.Position.X / room.width,
+						room.Position.Y / room.height
+					)
+				);
 
-		for (int i = -1; i <= 1; i++) {
-			for (int j = -1; j <= 1; j++) {
-				Node2D room = (Node2D)roomScene.Instantiate();
-				room.Position = pos + 550 * i * Vector2.Right + 550 * j * Vector2.Down;
-				Room roomArea = room.GetNode<Room>("Area2D");
-				if (i != 0 || j != 0)	roomArea.PlayerEntered += OnPlayerEntered;
+				RoomArea roomArea = room.GetNode<RoomArea>("Area2D");
+				if (i != 0 || j != 0) roomArea.PlayerEntered += OnPlayerEntered;
 				AddChild(room);
 			}
 		}
 	}
 
-	private void OnPlayerEntered(Vector2 pos)
+	private void OnPlayerEntered(Vector2 pos, Vector2 id)
 	{
-		currentRoomPos = pos;
-		GD.Print("Player entered room at position " + currentRoomPos.ToString());
-		foreach (Node2D node in GetChildren()) {
-			if (node.IsInGroup("Level")) {
+		currentRoomID = id;
+		 GD.Print("Player entered room with ID " + currentRoomID);
+		foreach (Node2D node in GetChildren())
+		{
+			if (node.IsInGroup("Level"))
+			{
 				node.CallDeferred(MethodName.Free);
 			}
 		}
-		CallDeferred(MethodName.GenerateSurroundingRooms, currentRoomPos);
+		CallDeferred(MethodName.GenerateSurroundingRooms, pos);
 	}
 
 }
