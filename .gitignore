@@ -6,3 +6,4 @@ builds
 .vscode/tasks.json
 *.import
 dodgecoin.sln
+target

@@ -1,23 +1,37 @@
-# dodgecoin
-A simple 2D game where you dodge coins to survive.
+# DodgeCoin Game
 
-## Project Description
-This project is a simple 2D game where you control a player to dodge coins. The game is now rewritten in Rust using the Bevy game engine.
+A simple 2D game where you control a ball trying to dodge moving coins. Built with Rust and the Bevy game engine.
 
-## Building and Running the Project
-To build and run the project, follow these steps:
+## Game Rules
+- Control your player (blue square) using WASD keys
+- Avoid the coins (yellow squares)
+- Coins spawn randomly and stay stationary for 3 seconds
+- After 3 seconds, coins start moving in random directions and bounce off walls
+- If you get hit by a coin, the game is over
 
-1. Install Rust and Cargo by following the instructions at [rust-lang.org](https://www.rust-lang.org/).
-2. Clone the repository:
-   ```
-   git clone https://github.com/tairasu/dodgecoin.git
-   cd dodgecoin
-   ```
-3. Build the project:
-   ```
-   cargo build --release
-   ```
-4. Run the project:
-   ```
-   cargo run --release
-   ```
+## Controls
+- W: Move up
+- S: Move down
+- A: Move left
+- D: Move right
+- (You can combine keys for diagonal movement)
+
+## Requirements
+- Rust (latest stable version)
+- Cargo (comes with Rust)
+
+## How to Run
+1. Clone this repository
+2. Navigate to the project directory
+3. Run the game:
+```bash
+cargo run --release
+```
+
+## Development
+The game is built using:
+- Bevy 0.12.0 - Game engine
+- rand 0.8.5 - Random number generation
+
+## Performance
+The game includes some optimization settings in Cargo.toml for better performance in both debug and release modes.
