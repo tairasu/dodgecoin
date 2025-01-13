@@ -3,6 +3,7 @@ mod components;
 mod constants;
 mod systems;
 mod resources;
+mod embedded_assets;
 
 use components::*;
 //use constants::*;

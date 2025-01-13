@@ -2,6 +2,7 @@ use bevy::{
     prelude::*,
     sprite::collide_aabb::{collide, Collision},
     app::AppExit,
+    render::texture::{CompressedImageFormats, ImageType, ImageSampler},
 };
 use rand::prelude::*;
 use std::time::Duration;
@@ -10,14 +11,32 @@ use crate::{
     components::{Player, Wall, MainCamera, Coin, Room, Direction, GameState, GameOverText, MenuUI, ButtonAction, Cleanup, MenuCleanup},
     constants::*,
     resources::*,
+    embedded_assets::{BALL_BYTES, COIN_BYTES},
 };
 
 pub fn load_assets(
     mut game_assets: ResMut<GameAssets>,
-    asset_server: Res<AssetServer>,
+    mut image_assets: ResMut<Assets<Image>>,
 ) {
-    game_assets.player_sprite = asset_server.load("ball.png");
-    game_assets.coin_sprite = asset_server.load("coin.png");
+    // Load player sprite from embedded bytes
+    let player_image = Image::from_buffer(
+        BALL_BYTES,
+        ImageType::Extension("png"),
+        CompressedImageFormats::default(),
+        true,
+        ImageSampler::default(),
+    ).unwrap();
+    game_assets.player_sprite = image_assets.add(player_image);
+
+    // Load coin sprite from embedded bytes
+    let coin_image = Image::from_buffer(
+        COIN_BYTES,
+        ImageType::Extension("png"),
+        CompressedImageFormats::default(),
+        true,
+        ImageSampler::default(),
+    ).unwrap();
+    game_assets.coin_sprite = image_assets.add(coin_image);
 }
 
 pub fn setup(mut commands: Commands, game_assets: Res<GameAssets>) {
