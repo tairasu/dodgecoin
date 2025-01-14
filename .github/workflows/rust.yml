@@ -1,5 +1,9 @@
 name: Release
 
+# Add permissions block at the top level
+permissions:
+  contents: write
+
 on:
   push:
     tags:
@@ -19,18 +23,14 @@ jobs:
             target: x86_64-pc-windows-msvc
             artifact_name: dodgecoin.exe
             asset_name: dodgecoin-windows-x64.zip
-          - os: windows-latest
-            target: i686-pc-windows-msvc
-            artifact_name: dodgecoin.exe
-            asset_name: dodgecoin-windows-x86.zip
           - os: ubuntu-latest
             target: x86_64-unknown-linux-gnu
             artifact_name: dodgecoin
             asset_name: dodgecoin-linux-x64.tar.gz
           - os: macos-latest
-            target: x86_64-apple-darwin
+            target: aarch64-apple-darwin
             artifact_name: dodgecoin
-            asset_name: dodgecoin-macos-x64.tar.gz
+            asset_name: dodgecoin-macos-arm64.tar.gz
 
     steps:
       - uses: actions/checkout@v4
