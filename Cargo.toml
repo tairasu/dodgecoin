@@ -4,8 +4,20 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-bevy = "0.12.0"
-rand = "0.8.5"
+bevy = { version = "0.12.0", default-features = false, features = [
+    "bevy_winit",
+    "bevy_core_pipeline",
+    "bevy_sprite",
+    "bevy_text",
+    "bevy_ui",
+    "bevy_render",
+    "bevy_asset",
+    "default_font",
+    "png",
+    "x11",
+    "webgl2"
+] }
+rand = { version = "0.8.5", default-features = false, features = ["std", "std_rng"] }
 
 # Enable a small amount of optimization in debug mode
 [profile.dev]
@@ -14,3 +26,12 @@ opt-level = 1
 # Enable high optimizations for dependencies (incl. Bevy)
 [profile.dev.package."*"]
 opt-level = 3
+
+[profile.release]
+lto = "thin"         # Link time optimization
+strip = true         # Strip symbols from binary
+opt-level = "z"      # Optimize for size
+codegen-units = 1    # Maximize size reduction
+panic = "abort"      # Remove panic unwinding code
+debug = false        # Remove debug symbols
+incremental = false  # Disable incremental compilation
