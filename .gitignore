@@ -7,3 +7,6 @@ builds
 *.import
 dodgecoin.sln
 target
+release
+release.zip
+release.tar.gz
