@@ -1,29 +1,66 @@
-# .github/workflows/rust.yml
+name: Release
 
 on:
-  release:
-    types: [created]
+  push:
+    tags:
+      - "v*.*.*"
+
+env:
+  CARGO_TERM_COLOR: always
 
 jobs:
-  release:
-    name: release ${{ matrix.target }}
-    runs-on: ubuntu-latest
+  build-release:
+    name: build-release
+    runs-on: ${{ matrix.os }}
     strategy:
-      fail-fast: false
       matrix:
         include:
-          - target: x86_64-pc-windows-gnu
-            archive: zip
-          - target: x86_64-unknown-linux-musl
-            archive: tar.gz tar.xz tar.zst
-          - target: x86_64-apple-darwin
-            archive: zip
+          - os: windows-latest
+            target: x86_64-pc-windows-msvc
+            artifact_name: dodgecoin.exe
+            asset_name: dodgecoin-windows-x64.zip
+          - os: windows-latest
+            target: i686-pc-windows-msvc
+            artifact_name: dodgecoin.exe
+            asset_name: dodgecoin-windows-x86.zip
+          - os: ubuntu-latest
+            target: x86_64-unknown-linux-gnu
+            artifact_name: dodgecoin
+            asset_name: dodgecoin-linux-x64.tar.gz
+          - os: macos-latest
+            target: x86_64-apple-darwin
+            artifact_name: dodgecoin
+            asset_name: dodgecoin-macos-x64.tar.gz
+
     steps:
-      - uses: actions/checkout@master
-      - name: Compile and release
-        uses: rust-build/rust-build.action@v1.4.5
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/checkout@v4
+      
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
         with:
-          RUSTTARGET: ${{ matrix.target }}
-          ARCHIVE_TYPES: ${{ matrix.archive }}
+          targets: ${{ matrix.target }}
+
+      - name: Build
+        run: cargo build --release --target ${{ matrix.target }}
+
+      - name: Create release archive
+        shell: bash
+        run: |
+          mkdir release
+          cp target/${{ matrix.target }}/release/${{ matrix.artifact_name }} release/
+          cp -r assets release/
+          cd release
+          if [[ "${{ matrix.os }}" == "windows-latest" ]]; then
+            7z a ../release.zip *
+          else
+            tar -czf ../release.tar.gz *
+          fi
+
+      - name: Upload binaries to release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: release.*
+          asset_name: ${{ matrix.asset_name }}
+          tag: ${{ github.ref }}
+          overwrite: true
